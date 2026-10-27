@@ -1,0 +1,70 @@
+/* Paleta de esta escena (distinta a las 4 del wrapped) */
+.s4{--bg:#4ea8ff;--a:#ffe14d;--b:#0f0f0f;--c:#ffffff;--d:#ff7a59;--e:#b6ff5c}
+
+/* Variantes de posición */
+.s4 .blob{border-radius:48% 52% 38% 62% / 55% 42% 58% 45%}
+.s4 .rings{right:-14vmax;bottom:auto;top:-14vmax}
+.s4 .checker{left:auto;right:6%;bottom:6%;clip-path:circle(50%);width:26vmax;height:26vmax}
+.s4 .bars{top:auto;bottom:8%;right:auto;left:6%;rotate:-5deg}
+.s4 .tube{right:auto;left:-6vmax;top:auto;bottom:22%;rotate:15deg}
+.s4 .flower{right:auto;left:8%;top:5%}
+.s4 .star{left:auto;right:10%;top:44%}
+
+/* Tarjeta */
+.intro{
+  position:fixed;left:50%;top:50%;translate:-50% -50%;
+  width:min(92vw,520px);
+  max-height:92dvh;
+  overflow:auto;
+  padding:clamp(18px,5vw,30px);
+  display:flex;flex-direction:column;gap:clamp(16px,4vw,24px);
+  background:#fff;color:#101010;
+  border-radius:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  z-index:10;
+  animation:subir .9s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes subir{from{opacity:0;transform:translateY(5vh)}}
+
+/* Texto que se va generando: el texto completo ya ocupa su lugar (oculto),
+   así la tarjeta no cambia de tamaño mientras se escribe */
+.msg{
+  font-size:clamp(.92rem,3.5vw,1.12rem);
+  font-weight:500;
+  line-height:1.55;
+}
+#rest{visibility:hidden}
+#typed::after{
+  content:"";
+  display:inline-block;
+  width:2px;height:1.1em;
+  margin-left:2px;
+  vertical-align:text-bottom;
+  background:currentColor;
+  animation:parpadeo 1s steps(1) infinite;
+}
+.msg.fin #typed::after{display:none}
+@keyframes parpadeo{50%{opacity:0}}
+
+/* Botón */
+.intro-btn{
+  display:block;
+  text-align:center;
+  padding:1em 1.4em;
+  font-size:clamp(.95rem,4vw,1.15rem);
+  font-weight:800;
+  text-decoration:none;
+  color:#ffe14d;
+  background:#101010;
+  border-radius:999px;
+  transition:transform .15s ease;
+  animation:latido 2.4s ease-in-out infinite;
+}
+.intro-btn:hover{transform:scale(1.03)}
+.intro-btn:active{transform:scale(.96)}
+.intro-btn:focus-visible{outline:3px solid #ff7a59;outline-offset:3px}
+@keyframes latido{50%{scale:1.03}}
+
+@media (prefers-reduced-motion:reduce){
+  .intro,.intro-btn{animation:none}
+}

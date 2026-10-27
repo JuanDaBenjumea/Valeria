@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wrapped</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wrapped.css">
+</head>
+<body data-scene="0">
+
+  <!-- Fondos (se generan 4 escenas desde esta plantilla) -->
+  <div class="stage" aria-hidden="true"></div>
+
+  <template id="tpl-scene">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="rings"></div>
+    <div class="checker"></div>
+    <div class="bars"></div>
+    <svg class="squiggle" viewBox="0 0 400 200">
+      <path pathLength="1000" d="M5 120 C 60 20, 100 200, 160 100 S 260 20, 320 110 S 380 150, 395 90"/>
+    </svg>
+    <svg class="flower" viewBox="0 0 100 100">
+      <path d="M50 50 C30 5,70 5,50 50 C95 30,95 70,50 50 C70 95,30 95,50 50 C5 70,5 30,50 50Z"/>
+    </svg>
+    <svg class="star" viewBox="0 0 100 100">
+      <path d="M50 0 L61 39 L100 50 L61 61 L50 100 L39 61 L0 50 L39 39Z"/>
+    </svg>
+    <svg class="tube" viewBox="0 0 400 200">
+      <defs>
+        <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset=".3" stop-color="#8d8d8d"/>
+          <stop offset=".5" stop-color="#ffffff"/>
+          <stop offset=".75" stop-color="#3c3c3c"/>
+          <stop offset="1" stop-color="#e9e9e9"/>
+        </linearGradient>
+      </defs>
+      <path d="M20 90 C 120 -40, 160 190, 240 90 S 330 20, 385 140"/>
+    </svg>
+  </template>
+
+  <!-- Reproductor -->
+  <main class="player" id="player" data-playing="false" aria-label="Reproductor">
+    <div class="top">
+      <!-- PORTADA: la imagen se asigna en wrapped.js (campo "portada") -->
+      <div class="cover">
+        <span>♪</span>
+        <img id="cover" alt="Portada de la canción" hidden>
+      </div>
+      <div class="info">
+        <h1 id="titulo"></h1>
+        <p id="artista"></p>
+      </div>
+    </div>
+
+    <div class="progress"><div id="fill"></div></div>
+    <div class="times"><span id="t-act">0:00</span><span id="t-rest">-0:30</span></div>
+
+    <div class="controls">
+      <button class="btn" id="prev" aria-label="Retroceder">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 6v12z"/></svg>
+      </button>
+      <button class="btn play" id="play" aria-label="Reproducir / Pausar">
+        <svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </button>
+      <button class="btn" id="next" aria-label="Adelantar">
+        <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18V6l8.5 6z"/></svg>
+      </button>
+    </div>
+
+    <div class="dots"><i></i><i></i><i></i><i></i></div>
+  </main>
+
+  <!-- AUDIO MP3: la ruta se asigna en wrapped.js (campo "audio") -->
+  <audio id="audio" preload="auto"></audio>
+
+  <script src="wrapped.js"></script>
+</body>
+</html>

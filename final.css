@@ -1,0 +1,150 @@
+/* Paleta de esta escena */
+.s5{--bg:#2fd6c4;--a:#ffe14d;--b:#0f0f0f;--c:#ffffff;--d:#ff7a59;--e:#9b5cff}
+.s5 .blob{border-radius:55% 45% 40% 60% / 45% 55% 45% 55%}
+.s5 .rings{left:-14vmax;right:auto;bottom:-14vmax}
+.s5 .checker{left:auto;right:5%;top:8%;bottom:auto;clip-path:polygon(50% 0,100% 100%,0 100%);width:24vmax;height:24vmax}
+.s5 .bars{top:auto;bottom:10%;right:6%;rotate:8deg}
+.s5 .tube{right:auto;left:-4vmax;top:-2vmax;rotate:-10deg}
+.s5 .flower{right:auto;left:46%;top:auto;bottom:4%}
+.s5 .star{left:auto;right:8%;top:42%}
+
+/* Esta página sí puede hacer scroll (en pantallas bajas) */
+html,body{height:auto;min-height:100%}
+body{overflow-x:hidden;overflow-y:auto}
+
+.final{
+  position:relative;
+  z-index:10;
+  min-height:100dvh;
+  padding:clamp(16px,4vw,40px);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(12px,4vw,48px);
+}
+
+/* ---------- ramo ---------- */
+.ramo{
+  height:min(46dvh,520px);
+  max-width:86vw;
+  aspect-ratio:4/5;
+  overflow:visible;
+  filter:drop-shadow(0 1.2rem 1.4rem rgba(0,0,0,.25));
+}
+.bal{transform-origin:200px 478px;animation:balanceo 5s ease-in-out 3s infinite alternate}
+@keyframes balanceo{
+  from{transform:rotate(-1.8deg)}
+  to{transform:rotate(1.8deg)}
+}
+
+.papel{animation:subirPapel 1s cubic-bezier(.2,.9,.3,1) both var(--d)}
+@keyframes subirPapel{from{opacity:0;transform:translateY(40px)}}
+
+.tallo{stroke-dasharray:420;stroke-dashoffset:420;animation:crecer 1.4s ease-out forwards var(--d)}
+@keyframes crecer{to{stroke-dashoffset:0}}
+
+.hoja{
+  transform-box:fill-box;
+  transform-origin:50% 100%;
+  animation:brotar 1s ease-out both var(--d);
+}
+@keyframes brotar{from{transform:scale(0)}}
+
+.fl{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:
+    florecer 1.1s cubic-bezier(.2,1.5,.4,1) both var(--d),
+    girar 26s linear 4s infinite;
+}
+@keyframes florecer{from{transform:scale(0) rotate(-120deg);opacity:0}}
+@keyframes girar{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+
+.lazo{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:brotar 1s cubic-bezier(.2,1.5,.4,1) both 2.4s;
+}
+
+/* ---------- carta ---------- */
+.carta{
+  width:min(92vw,520px);
+  padding:clamp(18px,5vw,30px);
+  background:#fff;
+  color:#101010;
+  border-radius:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  font-size:clamp(.92rem,3.6vw,1.1rem);
+  font-weight:500;
+  line-height:1.6;
+  animation:aparecer 1s ease-out both 1.6s;
+}
+.carta p + p{margin-top:1em}
+.firma{font-weight:800}
+@keyframes aparecer{from{opacity:0;transform:translateY(5vh)}}
+
+.responder{
+  display:block;
+  margin-top:clamp(16px,4vw,24px);
+  padding:1em 1.4em;
+  text-align:center;
+  font-size:clamp(1rem,4vw,1.2rem);
+  font-weight:800;
+  text-decoration:none;
+  color:#fff;
+  background:#16a34a;
+  border-radius:999px;
+  box-shadow:0 .5rem 1.2rem rgba(22,163,74,.45);
+  transition:transform .15s ease;
+  animation:latido 2.4s ease-in-out infinite;
+}
+.responder:hover{transform:scale(1.03)}
+.responder:active{transform:scale(.96)}
+.responder:focus-visible{outline:3px solid #0f0f0f;outline-offset:3px}
+@keyframes latido{50%{scale:1.03}}
+
+/* ---------- pétalos que caen ---------- */
+.petalos{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:5}
+.petalo{
+  position:absolute;
+  top:-8vh;
+  left:var(--x);
+  width:var(--s);
+  height:calc(var(--s) * 1.4);
+  background:#ff8fc3;
+  border-radius:60% 0 60% 0;
+  opacity:.85;
+  animation:caer var(--t) linear var(--dl) infinite;
+}
+@keyframes caer{
+  to{transform:translate(var(--dx),115vh) rotate(540deg)}
+}
+
+/* ---------- botón de música ---------- */
+.musica{
+  position:fixed;top:14px;right:14px;z-index:20;
+  width:46px;height:46px;border:0;border-radius:50%;
+  background:#fff;color:#101010;
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  transition:transform .15s ease;
+}
+.musica svg{width:24px;height:24px;fill:currentColor}
+.musica:active{transform:scale(.92)}
+.musica:focus-visible{outline:3px solid #16a34a;outline-offset:3px}
+.musica .tacha{display:none}
+.musica.off .ondas{display:none}
+.musica.off .tacha{display:block}
+
+/* ---------- pantallas anchas: ramo y carta lado a lado ---------- */
+@media (min-width:900px){
+  .ramo{height:min(78dvh,640px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .petalo,.bal,.fl,.responder{animation:none}
+}

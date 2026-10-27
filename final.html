@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Para Valeria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wrapped.css">
+  <link rel="stylesheet" href="final.css">
+</head>
+<body>
+
+  <!-- Fondo -->
+  <div class="stage" aria-hidden="true">
+    <div class="scene s5 active">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="rings"></div>
+      <div class="checker"></div>
+      <div class="bars"></div>
+      <svg class="squiggle" viewBox="0 0 400 200">
+        <path pathLength="1000" d="M5 120 C 60 20, 100 200, 160 100 S 260 20, 320 110 S 380 150, 395 90"/>
+      </svg>
+      <svg class="flower" viewBox="0 0 100 100">
+        <path d="M50 50 C30 5,70 5,50 50 C95 30,95 70,50 50 C70 95,30 95,50 50 C5 70,5 30,50 50Z"/>
+      </svg>
+      <svg class="star" viewBox="0 0 100 100">
+        <path d="M50 0 L61 39 L100 50 L61 61 L50 100 L39 61 L0 50 L39 39Z"/>
+      </svg>
+      <svg class="tube" viewBox="0 0 400 200">
+        <defs>
+          <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset=".3" stop-color="#8d8d8d"/>
+            <stop offset=".5" stop-color="#ffffff"/>
+            <stop offset=".75" stop-color="#3c3c3c"/>
+            <stop offset="1" stop-color="#e9e9e9"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 90 C 120 -40, 160 190, 240 90 S 330 20, 385 140"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Pétalos que caen (se generan en final.js) -->
+  <div class="petalos" id="petalos" aria-hidden="true"></div>
+
+  <!-- Botón de música -->
+  <button class="musica" id="musica" aria-label="Activar o silenciar música" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9z"/>
+      <path class="ondas" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path class="tacha" d="M17 8l5 8M22 8l-5 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <main class="final">
+
+    <!-- Ramo animado -->
+    <svg class="ramo" viewBox="0 0 400 500" role="img" aria-label="Ramo de flores rosas animado">
+      <defs>
+        <symbol id="flor" viewBox="-50 -50 100 100">
+          <g stroke="rgba(160,30,90,.22)" stroke-width="1">
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-27" rx="15" ry="24" fill="var(--p)" transform="rotate(315)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(22.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(67.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(112.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(157.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(202.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(247.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(292.5)"/>
+            <ellipse cx="0" cy="-17" rx="11" ry="17" fill="var(--p2)" transform="rotate(337.5)"/>
+          </g>
+          <circle r="9" fill="var(--c)"/>
+          <circle cx="-3" cy="-3" r="2" fill="rgba(255,255,255,.7)"/>
+        </symbol>
+      </defs>
+
+      <g class="bal">
+        <!-- papel de atrás -->
+        <path class="papel" style="--d:0s" d="M92 235 Q200 150 308 235 L228 478 L172 478Z" fill="#ffc9e2"/>
+
+        <!-- tallos -->
+        <g fill="none" stroke="#3fa34d" stroke-width="5" stroke-linecap="round">
+          <path class="tallo" style="--d:.3s" d="M200 150 C200 250 200 330 200 395"/>
+          <path class="tallo" style="--d:.4s" d="M140 185 C150 270 190 330 200 395"/>
+          <path class="tallo" style="--d:.5s" d="M262 182 C250 270 210 330 200 395"/>
+          <path class="tallo" style="--d:.6s" d="M98 240 C120 300 180 340 200 395"/>
+          <path class="tallo" style="--d:.7s" d="M302 238 C280 300 220 340 200 395"/>
+          <path class="tallo" style="--d:.8s" d="M168 235 C180 290 195 340 200 395"/>
+          <path class="tallo" style="--d:.9s" d="M236 232 C224 290 205 340 200 395"/>
+        </g>
+
+        <!-- hojas -->
+        <g fill="#4cc15e" stroke="#3fa34d" stroke-width="1.5">
+          <g transform="translate(112 205) rotate(-50)"><ellipse class="hoja" style="--d:1s" rx="10" ry="30"/></g>
+          <g transform="translate(290 200) rotate(50)"><ellipse class="hoja" style="--d:1.1s" rx="10" ry="30"/></g>
+          <g transform="translate(160 140) rotate(-20)"><ellipse class="hoja" style="--d:1.2s" rx="9" ry="26"/></g>
+          <g transform="translate(246 138) rotate(20)"><ellipse class="hoja" style="--d:1.3s" rx="9" ry="26"/></g>
+        </g>
+
+        <!-- papel del frente -->
+        <path class="papel" style="--d:.2s" d="M96 262 Q200 330 304 262 L228 478 L172 478Z" fill="#ff9ccb"/>
+        <path class="papel" style="--d:.2s" d="M96 262 Q150 300 200 395 L172 478Z" fill="#ffb3d7"/>
+        <path class="papel" style="--d:.2s" d="M96 262 Q200 330 304 262" fill="none" stroke="#f5c46b" stroke-width="2.5"/>
+
+        <!-- flores -->
+        <g transform="translate(98 240) scale(.85)">
+          <use class="fl" style="--d:1.2s;--p:#ffa6d0;--p2:#ff7ab8;--c:#fff3a0" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(302 238) scale(.85)">
+          <use class="fl" style="--d:1.35s;--p:#ff7ab8;--p2:#ff4f9e;--c:#ffe14d" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(140 185) scale(.95)">
+          <use class="fl" style="--d:1.5s;--p:#ff5fa8;--p2:#e63c8c;--c:#ffe14d" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(262 182) scale(.95)">
+          <use class="fl" style="--d:1.65s;--p:#ffc2de;--p2:#ff94c6;--c:#fff3a0" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(168 235) scale(.9)">
+          <use class="fl" style="--d:1.8s;--p:#ff7ab8;--p2:#ff4f9e;--c:#fff3a0" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(236 232) scale(.9)">
+          <use class="fl" style="--d:1.95s;--p:#ffa6d0;--p2:#ff7ab8;--c:#ffe14d" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+        <g transform="translate(200 150) scale(1.05)">
+          <use class="fl" style="--d:2.1s;--p:#ff94c6;--p2:#ff5fa8;--c:#ffe14d" href="#flor" x="-50" y="-50" width="100" height="100"/>
+        </g>
+
+        <!-- lazo -->
+        <g class="lazo" stroke="#e63c8c" stroke-width="2" fill="#ff5fa8">
+          <path d="M200 415 C190 440 180 462 172 478 L196 440Z"/>
+          <path d="M200 415 C210 440 220 462 228 478 L204 440Z"/>
+          <ellipse cx="163" cy="408" rx="38" ry="20" transform="rotate(-25 163 408)"/>
+          <ellipse cx="237" cy="408" rx="38" ry="20" transform="rotate(25 237 408)"/>
+          <circle cx="200" cy="415" r="13" fill="#ff7ab8"/>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Mensaje -->
+    <section class="carta">
+      <p>Hay algo en ti que me da curiosidad, y no hablo solo de lo linda que eres o de esa sonrisa que se me quedó grabada. Me gustaría tener la oportunidad de descubrir tus gustos, tus ocurrencias, tus historias y esas cosas que quizá no cualquiera llega a conocer de ti. No sé qué pueda pasar, pero me parece que sería bonito darle la oportunidad a la casualidad.</p>
+      <p class="firma">Att: J (tu admirador)</p>
+
+      <a class="responder" href="https://wa.me/573007707285?text=%C2%BFQue%20opinas%3F" target="_blank" rel="noopener">Responder</a>
+    </section>
+
+  </main>
+
+  <!-- AUDIO MP3: la ruta se asigna en final.js (constante CANCION) -->
+  <audio id="audio" preload="auto" loop></audio>
+
+  <script src="final.js"></script>
+</body>
+</html>

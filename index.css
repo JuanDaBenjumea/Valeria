@@ -1,0 +1,129 @@
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#ffd9e8;
+  --pink:#ffa8cd;
+  --pink-dark:rgba(214,90,140,.38);
+  --light:rgba(255,255,255,.85);
+}
+
+html,body{height:100%}
+body{
+  min-height:100dvh;
+  background:radial-gradient(circle at 30% 20%,#ffe8f1,var(--bg) 60%);
+  font-family:"Baloo 2",system-ui,sans-serif;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- formas clay ---------- */
+.clay{
+  position:absolute;
+  background:var(--pink);
+  box-shadow:
+    inset -1.2vmax -1.2vmax 2.4vmax var(--pink-dark),
+    inset 1.2vmax 1.2vmax 2.4vmax var(--light),
+    1.6vmax 2.2vmax 3.6vmax rgba(214,90,140,.3);
+  animation:float 7s ease-in-out infinite;
+}
+.c1{width:26vmax;height:26vmax;border-radius:50%;top:-6vmax;left:-6vmax;background:#ffb8d6}
+.c2{width:34vmax;height:20vmax;border-radius:20vmax;bottom:6%;right:-8vmax;background:#ffc6dd;animation-delay:-2s}
+.c3{width:15vmax;height:15vmax;border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;top:14%;right:12%;background:#ff9cc7;animation-delay:-4s}
+.c4{width:12vmax;height:12vmax;border-radius:50%;bottom:10%;left:12%;background:#ffd0e3;animation-delay:-1s}
+
+.ring{background:#ffb0d2;border-radius:50%}
+.ring::after{
+  content:"";
+  position:absolute;
+  inset:28%;
+  border-radius:50%;
+  background:var(--bg);
+  box-shadow:
+    inset 1vmax 1vmax 1.8vmax rgba(214,90,140,.35),
+    inset -.8vmax -.8vmax 1.4vmax var(--light);
+}
+.r1{width:18vmax;height:18vmax;top:42%;left:-5vmax;animation-delay:-3s}
+.r2{width:13vmax;height:13vmax;top:6%;left:46%;animation-delay:-5s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-2vmax) rotate(6deg)}
+}
+
+/* ---------- imagen + botón ---------- */
+main{
+  position:relative;
+  z-index:2;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+  padding:0;
+  background:none;
+  border:0;
+}
+.hero{
+  position:relative;
+  width:min(82vw,460px,80dvh);   /* ← tamaño de la imagen */
+  margin:0;
+  padding:0;
+  background:none;
+  border:0;
+  box-shadow:none;
+  line-height:0;
+  container-type:inline-size;    /* permite escalar el texto del botón con la imagen */
+
+  /* zona del botón sobre las piernas (en % de la imagen) */
+  --boton-x:20%;        /* borde izquierdo */
+  --boton-ancho:72%;    /* ancho */
+  --boton-alto:36%;     /* alto */
+  --boton-abajo:-4%;    /* negativo = más abajo, positivo = más arriba */
+}
+
+.cta{
+  position:absolute;
+  left:var(--boton-x);
+  bottom:var(--boton-abajo);
+  width:var(--boton-ancho);
+  height:var(--boton-alto);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  font-size:clamp(1.3rem,11cqw,3rem);
+  font-weight:800;
+  color:#b8346f;
+  text-decoration:none;
+  background:var(--pink);
+  border-radius:3.2rem 3.2rem 1rem 1rem;
+  box-shadow:
+    inset -.5rem -.7rem 1.2rem var(--pink-dark),
+    inset .5rem .5rem 1rem var(--light),
+    .5rem .8rem 1.6rem rgba(214,90,140,.4);
+  transition:transform .2s ease, box-shadow .2s ease;
+  animation:latido 2.6s ease-in-out infinite;
+}
+.cta:hover{transform:translateY(-4px) scale(1.03)}
+.cta:active{
+  transform:scale(.97);
+  box-shadow:
+    inset -.3rem -.4rem .7rem var(--light),
+    inset .5rem .7rem 1.2rem var(--pink-dark);
+}
+.cta:focus-visible{outline:4px solid #fff;outline-offset:5px}
+
+
+@keyframes latido{50%{scale:1.03}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important}
+}
